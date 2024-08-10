@@ -22,7 +22,7 @@ do
     Console.WriteLine("8. Ver la temperatura más baja");
     Console.WriteLine("9. Ver el pronóstico de 5 días posteriores al mes.");
     Console.WriteLine("10. Ver calendario de temperaturas ");
-    Console.WriteLine("11. Salir del programa ");
+    Console.WriteLine("0. Salir del programa ");
     Console.Write("Ingrese su opcion deseada --> ");
     if (int.TryParse(Console.ReadLine(), out int opc) == false)
     {
@@ -314,11 +314,15 @@ static void proximos5dias()
     while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
 }
 static void mostrarCalendario(int [,] vec){
+    int cont = 0;
     for (int i = 0; i < vec.GetLength(0); i++)
     {
         for (int j = 0; j < vec.GetLength(1); j++)
         {
-            Console.Write(vec[i, j] + "\t");
+            cont++;
+            if (cont <= 31) {
+                Console.Write(vec[i, j] + "\t");
+            }
         }
         Console.WriteLine();
     }
