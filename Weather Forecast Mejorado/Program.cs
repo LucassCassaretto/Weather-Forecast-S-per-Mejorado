@@ -48,8 +48,8 @@ do
             case 5: temperaturasMayoresA20(temperatura); 
                 break;
             case 6:
-                    int promedio = promedioMes(temperatura);
-                    Console.WriteLine("La temperatura promedio del mes es de: "+ promedio+ "° grados");
+                    double promedio = promedioMes(temperatura);
+                    Console.WriteLine("La temperatura promedio del mes es de: "+ $"{promedio:F1}" + "° grados");
                     Console.WriteLine();
                     Console.WriteLine("Presiona Enter para continuar...");
                     while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
@@ -79,17 +79,17 @@ do
             case 10: mostrarCalendario(temperatura);
                 break;
 
-            case 11:
-                Console.WriteLine("Saliendo del programa");
+            case 0:
+                Console.WriteLine("Saliendo del programa...");
                 return;
 
             default:
                 Console.WriteLine("¡DEBE INGRESAR UNA OPCION VÁLIDA!");
                 break;
     }
+    if(opc!=10)  Console.Clear(); /// Validación para que la consola no se limpie cuando vemos el calendario, para asi poder comprobar nuetras respuestas
+                                 
 } while (continua);
-
-
 
 
 
@@ -105,10 +105,18 @@ static void ingresarTemperaturaManual(int[,] vec,int cont, bool bol)
             cont++;
             if (cont <= 31)
             {
-                Console.Write("Ingrese temperatura para el dia " + cont + " : ");
-                int.TryParse(Console.ReadLine(), out int temp);
-                vec[i, j] = temp;
-            }
+                ///Do-while para validación de ingreso de numeros.
+                do
+                {
+                    Console.Write("Ingrese temperatura para el dia " + cont + " : ");
+                    if (int.TryParse(Console.ReadLine(), out int temp) == true)
+                    {
+                        vec[i, j] = temp;
+                        break;
+                    }
+                    else Console.WriteLine("¡¡Debe ingresar un numero!!");
+                } while (true);
+;            }
             else break;
         }
     }
@@ -143,13 +151,16 @@ static void temperaturaAutomatica(int[,] vec, int cont, bool bol)
 static void temperaturaDiaEspecifico(int [,] vec, int cont)
 {
     int tempe = 0;
-    Console.Write("Ingrese dia, para ver su temperatura: ");
-    int.TryParse(Console.ReadLine(), out int Dia);
-    if (Dia < 1 && Dia > 31)
+    int Dia;
+    do
     {
+        Console.Write("Ingrese dia, para ver su temperatura: ");
+        int.TryParse(Console.ReadLine(), out Dia);
+        if (Dia > 1 && Dia <= 31) break;
+       
         Console.WriteLine("Debe ingresar un dia valido!");
-       // break;
-    }
+        
+    } while (true);
     for (int i = 0; i < vec.GetLength(0); i++)
     {
         for (int j = 0; j < vec.GetLength(1); j++)
@@ -235,10 +246,10 @@ static void temperaturasMayoresA20(int [,] vec)
 
     while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
 }
-static int promedioMes(int[,] vec)
+static double promedioMes(int[,] vec)
 {
     int cont = 0;
-    int suma = 0;
+    double suma = 0;
 
 
     for (int i = 0; i < vec.GetLength(0); i++)
@@ -253,7 +264,7 @@ static int promedioMes(int[,] vec)
         }
     }
 
-    int promedio = suma / 31;
+    double promedio = suma / 31;
 
     return promedio;
 }
