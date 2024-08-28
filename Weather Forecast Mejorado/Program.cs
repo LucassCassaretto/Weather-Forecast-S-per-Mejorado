@@ -1,8 +1,28 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using Weather_Forecast_Mejorado;
 using static System.Net.Mime.MediaTypeNames;
 
-int[,] temperatura = new int[5, 7];
+Profesional pas = new Profesional();
+pas.Nombre = "Lucas";
+pas.Apellido = "Cassaretto";
+pas.Dni = 42087420;
+pas.Matricula = 7689;
+
+RegistroTemperatura reg = new RegistroTemperatura();
+
+reg.CargarRegistro(pas,null);
+
+
+EstacionMeteorologica est = new EstacionMeteorologica();
+
+est.RegistrarTemperatura(reg);
+
+est.mostrar();
+
+
+
+/*int[,] temperatura = new int[5, 7];
 
 
 bool continua = true;
@@ -342,4 +362,4 @@ static void mostrarCalendario(int [,] vec){
     Console.WriteLine("Presiona Enter para continuar...");
     while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
 
-}
+}*/
