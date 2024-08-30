@@ -44,11 +44,23 @@ namespace Weather_Forecast_Mejorado
                         else
                         {
                             tempe = RegistroTemp.RegistroTemp[i, j].TemperaturaRegistrada;
-                            Console.WriteLine("La temperatura del dia indicado es: " + tempe);
+                            Console.WriteLine("La temperatura del dia indicado es: " + tempe + "° Grados");
+                            if (RegistroTemp.RegistroTemp[i, j].Pasante != null)
+                            {
+                                Console.WriteLine($"Temperatura registrada por: {RegistroTemp.RegistroTemp[i, j].Pasante.Nombre} Legajo: {RegistroTemp.RegistroTemp[i, j].Pasante.Legajo}");
+                            }else if (RegistroTemp.RegistroTemp[i, j].Profesional != null)
+                            {
+                                Console.WriteLine($"Temperatura registrada por: {RegistroTemp.RegistroTemp[i, j].Profesional.Nombre} Matricula: {RegistroTemp.RegistroTemp[i, j].Profesional.Matricula}");
+                            }
+                            Console.WriteLine($"Fecha de registro: { RegistroTemp.RegistroTemp[i, j].FechaRegistro}");
+                            Console.WriteLine($"Hora de registro: {RegistroTemp.RegistroTemp[i, j].HoraRegistro}");
+
                         }
                     }
                 }
             }
+
+
             if (tempe < 0) Console.WriteLine("Hizo mucho frío.");
             else if (tempe <= 20) Console.WriteLine("El clima estaba fresco.");
             else Console.WriteLine("Hizo calor afuera.");
@@ -198,7 +210,7 @@ namespace Weather_Forecast_Mejorado
         public static void TemperaturaMasBaja(EstacionMeteorologica RegistroTemp)
         {
 
-            double min = double.MaxValue; // Usar el valor máximo posible para empezar
+            double min = double.MaxValue;
             int cont = 0;
 
             for (int i = 0; i < RegistroTemp.RegistroTemp.GetLength(0); i++)

@@ -16,11 +16,6 @@ namespace Weather_Forecast_Mejorado
             this.Matricula = matricula;
         }
 
-        public void MostrarProfesional()
-        {
-            Console.WriteLine($"Nombre: {Nombre} , Apellido: {Apellido}, Dni: {Dni}, Matricula: {Matricula}");
-        }
-
       
     }
 }

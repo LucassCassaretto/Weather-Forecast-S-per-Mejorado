@@ -16,10 +16,6 @@ namespace Weather_Forecast_Mejorado
             this.Legajo = legajo;
         }
 
-
-        public void MostrarPasante()
-        {
-            Console.WriteLine($"Nombre: {Nombre}, Apellido: {Apellido}, Dni: {Dni}, Legajo: {Legajo}");
-        }
+        
     }
 }
